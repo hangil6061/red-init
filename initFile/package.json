@@ -1,0 +1,29 @@
+{
+  "name": "projectName",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "createComponent" : "node tools/createComponent && node tools/createLoadCopmnent",
+    "refreshLoadComponent" :  "node tools/createLoadCopmnent",
+    "asset": "node tools/loadAssetFile",
+
+    "start": "webpack-dev-server --progress --colors --mode=development",
+    "build": "webpack --mode=production --config=webpack.config.prod.js",
+    "initFramework": "git clone https://github.com/hangil6061/red-framework.git framework"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "ts-loader": "^5.3.1",
+    "typescript": "^3.2.2",
+    "webpack": "^4.29.2",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "dependencies": {
+  }
+}

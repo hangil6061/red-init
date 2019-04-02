@@ -1,0 +1,15 @@
+{
+  "name": "red-init",
+  "version": "1.0.0",
+  "description": "",
+  "main": "initProject.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "bin": {
+    "red-init" : "./bin/index.js"
+  },
+  "publishConfig": { "registry": "http://parkhg.kr:8081/repository/npm-private/" }
+}
