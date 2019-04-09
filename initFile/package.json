@@ -1,5 +1,5 @@
 {
-  "name": "projectName",
+  "name": "postionKnights",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,7 @@
     "asset": "node tools/loadAssetFile",
     "start": "webpack-dev-server --progress --colors --mode=development",
     "build": "webpack --mode=production --config=webpack.config.prod.js",
+    "red-build": "node red-build",
     "initFramework": "git clone https://github.com/hangil6061/red-framework.git framework"
   },
   "author": "",
@@ -21,7 +22,8 @@
     "typescript": "^3.2.2",
     "webpack": "^4.29.2",
     "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.1.14",
+    "git-state": "^4.1.0"
   },
   "dependencies": {
   }

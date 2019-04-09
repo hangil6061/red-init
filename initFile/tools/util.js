@@ -101,10 +101,20 @@ function dirCopy( src, dst )
     }
 }
 
+function formatDate(date) {
+    return date.getFullYear() + '.' +
+        (date.getMonth() + 1) + '.' +
+        date.getDate() + ' ' +
+        date.getHours() + ':' +
+        date.getMinutes() + ':' +
+        date.getSeconds();
+}
+
 module.exports = {
     writeFileToString,
     stringFormat,
     addFileMultiEx,
     fileCopy,
-    dirCopy
+    dirCopy,
+    formatDate
 };
