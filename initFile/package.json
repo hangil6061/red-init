@@ -18,13 +18,13 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
+    "git-state": "^4.1.0",
+    "rimraf": "^2.6.3",
     "ts-loader": "^5.3.1",
     "typescript": "^3.2.2",
     "webpack": "^4.29.2",
     "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.1.14",
-    "git-state": "^4.1.0"
+    "webpack-dev-server": "^3.1.14"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }

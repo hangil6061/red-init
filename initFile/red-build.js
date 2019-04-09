@@ -1,7 +1,11 @@
-const git = require('git-state');
+
 const execSync = require('child_process').execSync;
 const fs = require('fs');
+const rimraf = require("rimraf");
+const git = require('git-state');
+
 const util = require( './tools/util' );
+
 
 const gitPaths = ['./', './framework'];
 const buildLogPath = './buildLog/';
@@ -64,6 +68,7 @@ async function readVersion( path ) {
     const dirArr = path.split('/');
     let cPath = '';
     for( let i = 0; i <dirArr.length-1; i++ ) {
+        if( dirArr[i] === '.' ) continue;
         cPath += dirArr[i];
         if( !fs.existsSync( cPath ) ) {
             fs.mkdirSync(cPath);
@@ -100,15 +105,18 @@ async function getPackageFile() {
 
 async function build() {
 
-    console.log( '커밋 상태 확인중...' );
+    console.log( '커밋 상태 확인...' );
     const check = await checkGit( gitPaths );
     if( !check ) {
         console.error( '변경 사항을 커밋 해주세요.' );
         return;
     }
 
+    console.log( '빌드 디렉토리 정리...' );
+    rimraf.sync(buildPath);
+
     try {
-        console.log( 'webpack 빌드 중...' );
+        console.log( 'webpack 빌드...' );
         const result = await webpack();
         console.log( result );
     }
@@ -118,7 +126,7 @@ async function build() {
     }
 
     for( let i = 0; i < copyDirList.length; i++ ) {
-        console.log( copyDirList[i] + '폴더 복사중...' );
+        console.log( copyDirList[i] + '폴더 복사...' );
         const dst = buildPath + copyDirList[i];
         if(!fs.existsSync(dst)){
             fs.mkdirSync(dst);
@@ -130,7 +138,7 @@ async function build() {
     let title = packageFile.name;
     let cssList = "";
 
-    console.log( 'index 파일 작성중...' );
+    console.log( 'index 파일 작성...' );
     const cssFileList = [];
     util.addFileMultiEx( './', cssSrcPath, ['css'], cssFileList );
 
@@ -158,7 +166,7 @@ async function build() {
     await util.writeFileToString( buildPath + 'index.html', index );
 
 
-    console.log( '로그 작성중...' );
+    console.log( '로그 작성...' );
     const commit = await lastCommit( gitPaths );
     const version = await readVersion( versionPath );
     const versionStr = `${version.Major}.${version.Miner}.${version.Patch}`;
@@ -171,7 +179,7 @@ ${versionStr}
 ${date}
 
 빌드된 커밋 정보
-${JSON.stringify(commit,null, 2)}    
+${JSON.stringify(commit,null, 2)}
 `;
 
     await util.writeFileToString( buildLogPath + versionStr + '.txt', log );
