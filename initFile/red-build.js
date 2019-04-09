@@ -1,4 +1,3 @@
-
 const execSync = require('child_process').execSync;
 const fs = require('fs');
 const rimraf = require("rimraf");
@@ -44,23 +43,30 @@ async function checkGit( paths ) {
 }
 
 async function lastCommit( paths ) {
-    const result = [];
+    // const result = [];
+    let resultString = "";
     for( let i = 0;i  < paths.length; i++ ) {
         const path = paths[i];
-        const commit = await messageSync( path );
-        const data = {
-            path,
-            commit,
-        };
-        result.push( data );
+        resultString += "============================================\n";
+        resultString += path + "\n";
+        resultString += "--------------------------------------------\n";
+        let commit = await messageSync( path );
+        commit = commit.toString();
+        resultString += commit + "\n";
+        // console.log( commit );
+        // const data = {
+        //     path,
+        //     commit : commit,
+        // };
+        // result.push( data );
     }
-
-    return result;
+    resultString += "============================================\n";
+    return resultString;
 }
 
 function messageSync (repo, opts) {
     opts = opts || {};
-    return execSync('git log -1 --pretty=full', {cwd: repo, maxBuffer: opts.maxBuffer}).toString().trim();
+    return execSync('git log -1 --pretty=fuller', {cwd: repo, maxBuffer: opts.maxBuffer});
 }
 
 
@@ -179,12 +185,12 @@ ${versionStr}
 ${date}
 
 빌드된 커밋 정보
-${JSON.stringify(commit,null, 2)}
+${commit}
 `;
 
     await util.writeFileToString( buildLogPath + versionStr + '.txt', log );
     await util.writeFileToString( versionPath, JSON.stringify( version ) );
-    await util.writeFileToString( buildPath + 'version.json', JSON.stringify({ version : versionStr } ));
+    await util.writeFileToString( buildPath + 'version.json', JSON.stringify({ version : versionStr, title } ));
 
     console.log( '빌드 완료.' );
 }
