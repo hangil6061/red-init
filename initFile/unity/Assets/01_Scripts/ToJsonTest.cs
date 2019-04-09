@@ -16,10 +16,14 @@ public class ToJsonTest : MonoBehaviour
     public void GameObjectToJson()
     {
         if (!target) return;
-    
+
+        string filePath = EditorUtility.SaveFolderPanel("save", saveGameObjectPath, "");
+        if (filePath == string.Empty) return;
+        saveGameObjectPath = filePath + "/"; ;
+
         GameObjectData data = new GameObjectData(target);
         string json = JsonConvert.SerializeObject(data);
-        Debug.Log(json);
+        Util.FileIO.WriteData(json, target.name + ".json", true, saveGameObjectPath);
     }
 
     [ContextMenu("SceneToJson")]

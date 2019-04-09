@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Spine.Unity;
 
 public static class ComponentDataGenerator
 {
@@ -11,13 +12,52 @@ public static class ComponentDataGenerator
         {
             return new SpriteData(comp as SpriteRenderer);
         }
-        else if( comp is Script )
+        else if (comp is Script)
         {
             return new ScriptData(comp as Script);
         }
         else if (comp is Image)
         {
+            switch((comp as Image).type)
+            {
+                case Image.Type.Filled:
+                    return new GaugeData(comp as Image);
+                case Image.Type.Sliced:
+                    return new NineSliceData(comp as Image);
+            }          
             return new SpriteData(comp as Image);
+        }
+        else if (comp is Text)
+        {
+            return new TextData(comp as Text);
+        }
+        else if( comp is Button )
+        {
+            return new ButtonData(comp as Button);
+        }
+        else if (comp is SkeletonGraphic)
+        {
+            return new SpineData(comp as SkeletonGraphic);
+        }
+        else if (comp is BoxCollider2D)
+        {
+            return new BoxCollider2DData(comp as BoxCollider2D);
+        }
+        else if (comp is CircleCollider2D)
+        {
+            return new CircleColliderData(comp as CircleCollider2D);
+        }
+        else if (comp is SpriteAnim)
+        {
+            return new SpriteAnimData(comp as SpriteAnim);
+        }
+        else if (comp is InputText)
+        {
+            return new InputTextData(comp as InputText);
+        }
+        else if (comp is Scroll)
+        {
+            return new ScrollData(comp as Scroll);
         }
 
         return null;

@@ -50,6 +50,9 @@ async function CreateComponent( name ) {
 `import Red from "${outPath}framework";
 
 class ${compName} extends Red.Script {
+    awake() {
+    }
+
     start() {
     }
 

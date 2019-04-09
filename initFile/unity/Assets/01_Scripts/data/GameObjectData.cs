@@ -13,6 +13,7 @@ public class GameObjectData
     public Vector3Data position;
     public Vector3Data scale;
     public Vector3Data rotation;
+    public Vector3Data size;
     public List<GameObjectData> children = new List<GameObjectData>();
     public List<ComponentData> components = new List<ComponentData>();
 
@@ -22,8 +23,10 @@ public class GameObjectData
         instanceID = go.GetInstanceID();
         isAcitive = go.activeSelf;
         position = new Vector3Data(go.transform.localPosition);
+        position.y *= -1;
         scale = new Vector3Data(go.transform.localScale);
         rotation = new Vector3Data(go.transform.localRotation.eulerAngles);
+        size = new Vector3Data((go.transform as RectTransform).sizeDelta);
 
         Component[] comps = go.GetComponents(typeof(Component));
     

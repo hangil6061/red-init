@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "createComponent" : "node tools/createComponent && node tools/createLoadCopmnent",
-    "refreshLoadComponent" :  "node tools/createLoadCopmnent",
+    "createComponent": "node tools/createComponent && node tools/createCopmnentIndex",
+    "refreshLoadComponent": "node tools/createCopmnentIndex",
     "asset": "node tools/loadAssetFile",
-
     "start": "webpack-dev-server --progress --colors --mode=development",
     "build": "webpack --mode=production --config=webpack.config.prod.js",
     "initFramework": "git clone https://github.com/hangil6061/red-framework.git framework"

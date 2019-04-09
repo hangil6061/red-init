@@ -3,4 +3,9 @@ package-lock.json
 dist/
 framework/
 node_modules/
-tool/
+unity/.vs/
+unity/unity.csproj
+unity/unity.sln
+unity/Library/
+unity/Temp/
+unity/unity.Editor.csproj

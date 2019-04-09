@@ -1,0 +1,10 @@
+/*@font-face {*/
+    /*font-family: 'RNTG Larger';*/
+    /*src: url('./RNTG Larger.ttf');*/
+/*}*/
+
+body {
+    margin: 0;
+    overflow: hidden;
+    /*font-family: 'RNTG Larger';*/
+}
