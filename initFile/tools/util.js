@@ -39,6 +39,21 @@ function addFileMultiEx(root, path, extensions, fileList = [] )
     }
 }
 
+function getFileList(root, path, fileList = [] ) {
+    fs.readdirSync(root + path).forEach(function (file) {
+        const crtPath = `${path}${file}`;
+        if (fs.lstatSync(root + crtPath + '/').isDirectory()) {
+            getFileList(root, crtPath + '/', fileList);
+        }
+        else {
+            fileList.push({
+                path : path,
+                fullPath : root + crtPath
+            });
+        }
+    });
+}
+
 async function writeFileToString( filePath, str )
 {
     try {
@@ -110,11 +125,20 @@ function formatDate(date) {
         date.getSeconds();
 }
 
+function getPackageFile(path) {
+    if( fs.existsSync( path + 'package.json' ) ) {
+        const data = fs.readFileSync( path + 'package.json' ).toString();
+        return JSON.parse( data );
+    }
+}
+
 module.exports = {
     writeFileToString,
     stringFormat,
     addFileMultiEx,
     fileCopy,
     dirCopy,
-    formatDate
+    formatDate,
+    getPackageFile,
+    getFileList
 };
