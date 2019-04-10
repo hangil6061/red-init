@@ -3,8 +3,8 @@ const FormData = require( 'form-data' );
 const {getPackageFile, getFileList} = require('./util');
 
 const root = `${__dirname}/../dist/`;
-// const url = 'http://parkhg.kr:3000/uploads/';
-const url = 'http://localhost:3000/uploads/';
+const url = 'http://parkhg.kr:3000/uploads/';
+// const url = 'http://localhost:3000/uploads/';
 
 
 const list = [];
