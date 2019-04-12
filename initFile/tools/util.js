@@ -125,9 +125,9 @@ function formatDate(date) {
         date.getSeconds();
 }
 
-function getPackageFile(path) {
-    if( fs.existsSync( path + 'package.json' ) ) {
-        const data = fs.readFileSync( path + 'package.json' ).toString();
+function getJsonFile(path) {
+    if( fs.existsSync( path  ) ) {
+        const data = fs.readFileSync( path ).toString();
         return JSON.parse( data );
     }
 }
@@ -139,6 +139,6 @@ module.exports = {
     fileCopy,
     dirCopy,
     formatDate,
-    getPackageFile,
+    getJsonFile,
     getFileList
 };

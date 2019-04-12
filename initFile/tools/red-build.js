@@ -3,7 +3,7 @@ const fs = require('fs');
 const rimraf = require("rimraf");
 const git = require('git-state');
 
-const { dirCopy, addFileMultiEx, writeFileToString, formatDate, getPackageFile } = require( './util' );
+const { dirCopy, addFileMultiEx, writeFileToString, formatDate, getJsonFile } = require( './util' );
 
 const root = __dirname + '/../';
 const gitPaths = ['./', './framework'];
@@ -126,7 +126,7 @@ async function build() {
         dirCopy( copyDirList[i], dst );
     }
 
-    const packageFile = await getPackageFile(root);
+    const packageFile = await getJsonFile(root + 'package.json');
     let title = packageFile.name;
     let cssList = "";
 
