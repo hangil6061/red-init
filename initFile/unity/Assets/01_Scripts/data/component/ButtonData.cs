@@ -33,7 +33,10 @@ public class ButtonData : ComponentData
                 normalSprite = button.targetGraphic.mainTexture.name;
                 highlightedSprite = button.spriteState.highlightedSprite.name;
                 pressedSprite = button.spriteState.pressedSprite.name;
-                disabledSprite = button.spriteState.disabledSprite.name;
+                if(button.spriteState.disabledSprite)
+                {
+                    disabledSprite = button.spriteState.disabledSprite.name;
+                }                
                 break;
             case Selectable.Transition.ColorTint:
                 normalColor = Util.ColorToHex( button.colors.normalColor );

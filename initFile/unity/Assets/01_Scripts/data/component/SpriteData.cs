@@ -11,6 +11,7 @@ public class SpriteData : ComponentData
     public Vector3Data size;
     public string color = "ffffff";
     public float alpha = 1;
+    public bool isInteracive = false;
 
     public SpriteData(SpriteRenderer spr) : base(spr, "sprite")
     {
@@ -28,5 +29,11 @@ public class SpriteData : ComponentData
         size = new Vector3Data((img.transform as RectTransform).sizeDelta);
         color = Util.ColorToHex( img.color );
         alpha = img.color.a;
+
+        if( img.GetComponent<Interactive>() )
+        {
+            isInteracive = true;
+        }
+
     }
 }

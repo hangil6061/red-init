@@ -25,6 +25,7 @@ public class TextData : ComponentData
         this.color = Util.ColorToHex(text.color);
         this.width = (int)text.rectTransform.sizeDelta.x;
         this.pivot = new Vector3Data((text.transform as RectTransform).pivot);
+        this.pivot.y = 1 - this.pivot.y;
 
         Outline outline = text.GetComponent<Outline>();
         if( outline )

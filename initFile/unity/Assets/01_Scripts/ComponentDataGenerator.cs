@@ -24,6 +24,8 @@ public static class ComponentDataGenerator
                     return new GaugeData(comp as Image);
                 case Image.Type.Sliced:
                     return new NineSliceData(comp as Image);
+                case Image.Type.Tiled:
+                    return new TiledSpriteData(comp as Image);
             }          
             return new SpriteData(comp as Image);
         }
@@ -58,6 +60,14 @@ public static class ComponentDataGenerator
         else if (comp is Scroll)
         {
             return new ScrollData(comp as Scroll);
+        }
+        else if (comp is ToggleButton)
+        {
+            return new ToggleButtonData(comp as ToggleButton);
+        }
+        else if (comp is PaintArea)
+        {
+            return new PaintAreaData(comp as PaintArea);
         }
 
         return null;
