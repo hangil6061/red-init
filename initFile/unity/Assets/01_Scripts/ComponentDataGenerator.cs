@@ -31,7 +31,14 @@ public static class ComponentDataGenerator
         }
         else if (comp is Text)
         {
-            return new TextData(comp as Text);
+            if( comp.GetComponent<MultiStyleText>() )
+            {
+                return new MultiStyleTextData(comp as Text);
+            }
+            else
+            {
+                return new TextData(comp as Text);
+            }          
         }
         else if( comp is Button )
         {
