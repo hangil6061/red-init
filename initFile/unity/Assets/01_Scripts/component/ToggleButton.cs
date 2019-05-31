@@ -10,7 +10,16 @@ public class ToggleButton : MonoBehaviour
 
     private void Reset()
     {
-        buttonImg = GetComponent<Image>();
+        if( buttonImg == null )
+        {
+            buttonImg = GetComponent<Image>();
+        }
+
+        if( onGameObject == null && transform.childCount > 0)
+        {
+            onGameObject = transform.GetChild(0).gameObject;
+        }
+       
     }
 
 }
