@@ -11,6 +11,9 @@ public class GaugeData : ComponentData
     public Vector3Data size;
     public string color = "ffffff";
     public float alpha = 1;
+    public string filledType = "horizontal";
+    public string fillOrigin = "top";
+    public bool fillClockwise = false;
 
     public GaugeData(Image img) : base(img, "gauge")
     {
@@ -23,5 +26,12 @@ public class GaugeData : ComponentData
         size = new Vector3Data((img.transform as RectTransform).sizeDelta);
         color = Util.ColorToHex(img.color);
         alpha = img.color.a;
+
+        if( img.fillMethod == Image.FillMethod.Radial360 )
+        {
+            filledType = "radial360";
+            fillClockwise = img.fillClockwise;
+        }
+
     }
 }
