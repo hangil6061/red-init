@@ -76,6 +76,10 @@ public static class ComponentDataGenerator
         {
             return new PaintAreaData(comp as PaintArea);
         }
+        else if( comp is ButtonEvent )
+        {
+            return new ButtonEventData(comp as ButtonEvent);
+        }
 
         return null;
     }

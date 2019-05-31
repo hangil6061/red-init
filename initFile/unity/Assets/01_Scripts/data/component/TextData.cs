@@ -15,6 +15,7 @@ public class TextData : ComponentData
     public Vector3Data pivot;
     public float strokeThickness = 0;
     public string strokeColor = "";
+    public int lineHeight = 0; 
 
     public TextData(Text text) : base(text, "text")
     {
@@ -26,6 +27,7 @@ public class TextData : ComponentData
         this.width = (int)text.rectTransform.sizeDelta.x;
         this.pivot = new Vector3Data((text.transform as RectTransform).pivot);
         this.pivot.y = 1 - this.pivot.y;
+        this.lineHeight = Mathf.RoundToInt(text.lineSpacing * this.fontSize * 1.13f);
 
         Outline outline = text.GetComponent<Outline>();
         if( outline )
