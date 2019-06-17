@@ -9,21 +9,26 @@ public class ToJsonTest : MonoBehaviour
     public string saveScenePath;
     public string saveGameObjectPath;
 
+    public string sceneFileName = "scene";
+
     public GameObject[] scenes;
-    public GameObject target;
+    public GameObject[] target;
 
     [ContextMenu("GameObjectToJson")]
     public void GameObjectToJson()
     {
-        if (!target) return;
+        if (target.Length == 0) return;
 
         string filePath = EditorUtility.SaveFolderPanel("save", saveGameObjectPath, "");
         if (filePath == string.Empty) return;
         saveGameObjectPath = filePath + "/"; ;
 
-        GameObjectData data = new GameObjectData(target);
-        string json = JsonConvert.SerializeObject(data);
-        Util.FileIO.WriteData(json, target.name + ".json", true, saveGameObjectPath);
+        for( int i = 0; i < target.Length; i++ )
+        {
+            GameObjectData data = new GameObjectData(target[i]);
+            string json = JsonConvert.SerializeObject(data);
+            Util.FileIO.WriteData(json, target[i].name + ".json", true, saveGameObjectPath);
+        }
     }
 
     [ContextMenu("SceneToJson")]
@@ -41,6 +46,6 @@ public class ToJsonTest : MonoBehaviour
         }
 
         string json = JsonConvert.SerializeObject(sceneDataArr);
-        Util.FileIO.WriteData(json, "scene.json", true, saveScenePath);
+        Util.FileIO.WriteData(json, sceneFileName + ".json", true, saveScenePath);
     }
 }
