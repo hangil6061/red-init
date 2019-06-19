@@ -80,6 +80,10 @@ public static class ComponentDataGenerator
         {
             return new ButtonEventData(comp as ButtonEvent);
         }
+        else if( comp is InitText )
+        {
+            return new InitTextData(comp as InitText);
+        }
 
         return null;
     }

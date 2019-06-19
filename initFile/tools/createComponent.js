@@ -51,6 +51,7 @@ async function CreateComponent( name ) {
 
 class ${compName} extends Red.Script {
     awake() {
+        super.awake();
     }
 
     start() {
