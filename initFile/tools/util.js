@@ -135,6 +135,34 @@ function getJsonFile(path) {
     }
 }
 
+async function readVersion( path ) {
+    const dirArr = path.split('/');
+    let cPath = '';
+    for( let i = 0; i <dirArr.length-1; i++ ) {
+        if( dirArr[i] === '.' ) continue;
+        cPath += dirArr[i];
+        if( !fs.existsSync( cPath ) ) {
+            fs.mkdirSync(cPath);
+        }
+    }
+
+    let version;
+    if( fs.existsSync( path ) ) {
+        version = JSON.parse( fs.readFileSync( path ).toString() );
+        version.Patch++;
+        // await util.writeFileToString( versionPath, JSON.stringify( result ) );
+    }
+    else {
+        version = {
+            Major : 0,
+            Miner : 0,
+            Patch : 0
+        };
+    }
+
+    return version;
+}
+
 module.exports = {
     writeFileToString,
     stringFormat,
@@ -144,5 +172,6 @@ module.exports = {
     formatDate,
     getJsonFile,
     getFileList,
-    mkdirSync
+    mkdirSync,
+    readVersion
 };

@@ -1,9 +1,10 @@
-const { addFileMultiEx, writeFileToString } = require( './util' );
+const { addFileMultiEx, writeFileToString, mkdirSync, readVersion } = require( './util' );
+const { versionPath } = require('./config');
 
 let detectExtensions = ['json', 'csv', 'mp3', 'm4a', 'ogg', 'wav', 'fnt', 'png', 'jpg'];
 let detectExtensions2 = ['json', 'fnt'];
 
-function loadAssets2D( root, srcDir, distDir )
+async function loadAssets2D( root, srcDir, distDir )
 {
     root = root || '../';
     srcDir = srcDir || '';
@@ -17,6 +18,16 @@ function loadAssets2D( root, srcDir, distDir )
     preload.json = getFileArr( srcDir + 'json/', root );
     preload.sound = getFileArr( srcDir + 'sound/', root );
     preload.spine = getFileArr( srcDir + 'spine/', root, detectExtensions2 );
+
+    const version = await readVersion( versionPath );
+    const versionQuery = `?vs=${version.Major}.${version.Miner}.${version.Patch}`;
+
+    for( let key in preload ) {
+        const obj = preload[key];
+        for( let i = 0; i < obj.length; i++ ) {
+            obj[i].path += versionQuery;
+        }
+    }
 
     writeFileToString(distDir + 'preload.json', JSON.stringify( preload, null, 2 ));
 }

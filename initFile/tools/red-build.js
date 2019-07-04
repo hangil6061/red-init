@@ -3,16 +3,18 @@ const fs = require('fs');
 const rimraf = require("rimraf");
 const git = require('git-state');
 
-const { dirCopy, addFileMultiEx, writeFileToString, formatDate, getJsonFile } = require( './util' );
+const { dirCopy, addFileMultiEx, writeFileToString, formatDate, getJsonFile, readVersion } = require( './util' );
+const { root, gitPaths, buildLogPath, versionPath, buildPath, copyDirList, cssSrcPath } = require('./config');
 
-const root = __dirname + '/../';
-const gitPaths = ['./', './framework'];
-const buildLogPath = './buildLog/';
-const versionPath = buildLogPath + 'lastVersion.json';
-const buildPath = './dist/';
 
-const copyDirList = [ './assets/', './css/' ];
-const cssSrcPath = 'css/';
+// const root = __dirname + '/../';
+// const gitPaths = ['./', './framework'];
+// const buildLogPath = './buildLog/';
+// const versionPath = buildLogPath + 'lastVersion.json';
+// const buildPath = './dist/';
+//
+// const copyDirList = [ './assets/', './css/' ];
+// const cssSrcPath = 'css/';
 
 
 async function checkGit( paths ) {
@@ -62,35 +64,6 @@ function messageSync (repo, opts) {
     return execSync('git log -1 --pretty=fuller', {cwd: repo, maxBuffer: opts.maxBuffer});
 }
 
-
-async function readVersion( path ) {
-    const dirArr = path.split('/');
-    let cPath = '';
-    for( let i = 0; i <dirArr.length-1; i++ ) {
-        if( dirArr[i] === '.' ) continue;
-        cPath += dirArr[i];
-        if( !fs.existsSync( cPath ) ) {
-            fs.mkdirSync(cPath);
-        }
-    }
-
-    let version;
-    if( fs.existsSync( path ) ) {
-        version = JSON.parse( fs.readFileSync( path ).toString() );
-        version.Patch++;
-        // await util.writeFileToString( versionPath, JSON.stringify( result ) );
-    }
-    else {
-        version = {
-            Major : 0,
-            Miner : 0,
-            Patch : 0
-        };
-    }
-
-    return version;
-}
-
 async function webpack() {
     return execSync('webpack --mode=production --config=webpack.config.prod.js').toString();
 }
@@ -131,13 +104,16 @@ async function build() {
     let cssList = "";
 
     console.log( 'index 파일 작성...' );
+    const version = await readVersion( versionPath );
+    const versionQuery = `?vs=${version.Major}.${version.Miner}.${version.Patch}`;
+
     const cssFileList = [];
     addFileMultiEx( root, cssSrcPath, ['css'], cssFileList );
 
     for( let i= 0;i < cssFileList.length; i++ ) {
         const data = cssFileList[i];
         cssList +=
-        `<link href='${data.path}' rel='stylesheet' type='text/css'>
+        `<link href='${data.path}${versionQuery}' rel='stylesheet' type='text/css'>
 `;
     }
 
@@ -150,7 +126,7 @@ async function build() {
     ${cssList}
 </head>
 <body>
-    <script src="js/game.js"></script>
+    <script src="js/game.js${versionQuery}"></script>
 </body>
 </html>
 `;
@@ -160,7 +136,6 @@ async function build() {
 
     console.log( '로그 작성...' );
     const commit = await lastCommit( gitPaths );
-    const version = await readVersion( versionPath );
     const versionStr = `${version.Major}.${version.Miner}.${version.Patch}`;
     const date = formatDate( new Date(Date.now()) );
     const log =
