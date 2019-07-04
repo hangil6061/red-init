@@ -1,41 +1,44 @@
 const fs = require('fs');
-const path = require('path');
+// const path = require('path');
 
 function addFileMultiEx(root, path, extensions, fileList = [] )
 {
     try
     {
-        if(!fs.existsSync(root + path)){
-            fs.mkdirSync(root + path);
-        }
-        else {
-            fs.readdirSync(root + path).forEach(function (file)
+        mkdirSync( root + path );
+
+        fs.readdirSync(root + path).forEach(function (file)
+        {
+            let curPath = path + file;
+
+            if( file.indexOf('.git') !== -1)
             {
-                let curPath = path + file;
 
-                if( file.indexOf('.git') !== -1)
+            }
+            else if (!fs.lstatSync(root + curPath).isDirectory())
+            {
+                for( let i = 0; i < extensions.length; i++ )
                 {
-
+                    if( file.indexOf( extensions[i] ) === -1) continue;
+                    fileList.push( { key : file.replace('.' + extensions[i], ''), path : curPath } );
+                    break;
                 }
-                else if (!fs.lstatSync(root + curPath).isDirectory())
-                {
-                    for( let i = 0; i < extensions.length; i++ )
-                    {
-                        if( file.indexOf( extensions[i] ) === -1) continue;
-                        fileList.push( { key : file.replace('.' + extensions[i], ''), path : curPath } );
-                        break;
-                    }
-                }
-                else
-                {
-                    addFileMultiEx( root, curPath + "/", extensions, fileList);
-                }
-            });
-        }
+            }
+            else
+            {
+                addFileMultiEx( root, curPath + "/", extensions, fileList);
+            }
+        });
     }
     catch (e)
     {
         console.log(e);
+    }
+}
+
+function mkdirSync( path ) {
+    if(!fs.existsSync(path)){
+        fs.mkdirSync(path);
     }
 }
 
@@ -140,5 +143,6 @@ module.exports = {
     dirCopy,
     formatDate,
     getJsonFile,
-    getFileList
+    getFileList,
+    mkdirSync
 };

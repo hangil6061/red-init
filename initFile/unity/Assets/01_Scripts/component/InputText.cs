@@ -11,6 +11,7 @@ public class InputText : MonoBehaviour
     public string placeholder = "Enter text...";
     public InputField.ContentType contentType = InputField.ContentType.Standard;
     public InputField.LineType lineType = InputField.LineType.SingleLine;
+    public TextAlignment textAlign = TextAlignment.Left;
 
     private void Start()
     {

@@ -18,6 +18,11 @@ public static class ComponentDataGenerator
         }
         else if (comp is Image)
         {
+            if( !(comp as Image).sprite )
+            {
+                return new SpriteData(comp as Image);
+            }
+
             switch((comp as Image).type)
             {
                 case Image.Type.Filled:

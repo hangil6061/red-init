@@ -14,6 +14,7 @@ public class InputTextData : ComponentData
     public float width;
     public float height;
     public Vector3Data pivot;
+    public string textAlign;
 
     public InputTextData(InputText input) : base(input, "inputText")
     {
@@ -27,5 +28,6 @@ public class InputTextData : ComponentData
         height = (input.transform as RectTransform).sizeDelta.y;
         pivot = new Vector3Data((input.transform as RectTransform).pivot);
         pivot.y = 1 - pivot.y;
+        textAlign = input.textAlign.ToString().ToLower();
     }
 }
