@@ -89,7 +89,11 @@ public static class ComponentDataGenerator
         {
             return new InitTextData(comp as InitText);
         }
-
+        else if( comp is ButtonText )
+        {
+            return new ButtonTextData(comp as ButtonText);
+        }
+             
         return null;
     }
 }

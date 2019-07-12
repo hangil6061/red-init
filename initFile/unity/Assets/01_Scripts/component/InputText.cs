@@ -12,6 +12,7 @@ public class InputText : MonoBehaviour
     public InputField.ContentType contentType = InputField.ContentType.Standard;
     public InputField.LineType lineType = InputField.LineType.SingleLine;
     public TextAlignment textAlign = TextAlignment.Left;
+    public Font font;
 
     private void Start()
     {
