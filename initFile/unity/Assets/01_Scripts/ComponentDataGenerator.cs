@@ -93,7 +93,11 @@ public static class ComponentDataGenerator
         {
             return new ButtonTextData(comp as ButtonText);
         }
-             
+        else if (comp is ImageFont)
+        {
+            return new ImageFontData(comp as ImageFont);
+        }
+
         return null;
     }
 }
