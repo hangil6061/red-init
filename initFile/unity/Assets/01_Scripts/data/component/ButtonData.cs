@@ -20,6 +20,11 @@ public class ButtonData : ComponentData
 
     public ButtonData(Button button) : base(button, "button")
     {
+        if( !button.targetGraphic )
+        {
+            Debug.Log(Util.GetGameObjectPath(button.gameObject));
+        }
+
         imageInstanceID = button.targetGraphic.GetInstanceID();
         transition = button.transition.ToString();
 

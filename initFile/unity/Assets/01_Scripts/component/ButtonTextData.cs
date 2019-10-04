@@ -12,8 +12,16 @@ public class ButtonTextData : ComponentData
     public ButtonTextData(ButtonText text) : base(text, "buttonText")
     {
         textInstanceID = text.targetText.GetInstanceID();
+
+        if(!text.targetButton)
+        {
+            Debug.Log( Util.GetGameObjectPath(text.gameObject) );
+        }
+
         buttonInstanceID = text.targetButton.GetInstanceID();
         enabledColor = Util.ColorToHex(text.enabledColor);
         disabledColor = Util.ColorToHex(text.disabledColor);
     }
+
+   
 }
