@@ -9,6 +9,7 @@ public class TextData : ComponentData
     public string text = "";
     public string font = "";
     public int fontSize = 0;
+    public string fontStyle = "";
     public string alignment = "";
     public string color = "";
     public int width = 0;
@@ -28,6 +29,7 @@ public class TextData : ComponentData
         this.pivot = new Vector3Data((text.transform as RectTransform).pivot);
         this.pivot.y = 1 - this.pivot.y;
         this.lineHeight = Mathf.RoundToInt(text.lineSpacing * this.fontSize * 1.13f);
+        this.fontStyle = text.fontStyle.ToString();
 
         Outline outline = text.GetComponent<Outline>();
         if( outline )

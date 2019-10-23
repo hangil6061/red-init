@@ -28,30 +28,39 @@ public class ButtonData : ComponentData
         imageInstanceID = button.targetGraphic.GetInstanceID();
         transition = button.transition.ToString();
 
-        Debug.Log( transition );
-        
-        switch ( button.transition )
+        //Debug.Log( transition );
+
+        try
         {
-            case Selectable.Transition.None:
-                break;
-            case Selectable.Transition.SpriteSwap:
-                normalSprite = button.targetGraphic.mainTexture.name;
-                highlightedSprite = button.spriteState.highlightedSprite.name;
-                pressedSprite = button.spriteState.pressedSprite.name;
-                if(button.spriteState.disabledSprite)
-                {
-                    disabledSprite = button.spriteState.disabledSprite.name;
-                }                
-                break;
-            case Selectable.Transition.ColorTint:
-                normalColor = Util.ColorToHex( button.colors.normalColor );
-                highlightedColor = Util.ColorToHex(button.colors.highlightedColor );
-                pressedColor = Util.ColorToHex(button.colors.pressedColor );
-                disabledColor = Util.ColorToHex(button.colors.disabledColor );
-                break;
-            case Selectable.Transition.Animation:
-                break;
+            switch (button.transition)
+            {
+                case Selectable.Transition.None:
+                    break;
+                case Selectable.Transition.SpriteSwap:
+                    normalSprite = button.targetGraphic.mainTexture.name;
+                    highlightedSprite = button.spriteState.highlightedSprite.name;
+                    pressedSprite = button.spriteState.pressedSprite.name;
+                    if (button.spriteState.disabledSprite)
+                    {
+                        disabledSprite = button.spriteState.disabledSprite.name;
+                    }
+                    break;
+                case Selectable.Transition.ColorTint:
+                    normalColor = Util.ColorToHex(button.colors.normalColor);
+                    highlightedColor = Util.ColorToHex(button.colors.highlightedColor);
+                    pressedColor = Util.ColorToHex(button.colors.pressedColor);
+                    disabledColor = Util.ColorToHex(button.colors.disabledColor);
+                    break;
+                case Selectable.Transition.Animation:
+                    break;
+            }
         }
+        catch
+        {
+            Debug.LogError(Util.GetGameObjectPath(button.gameObject));
+        }
+        
+        
 
 
         

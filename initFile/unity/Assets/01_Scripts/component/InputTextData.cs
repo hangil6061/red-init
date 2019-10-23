@@ -16,6 +16,7 @@ public class InputTextData : ComponentData
     public Vector3Data pivot;
     public string textAlign;
     public string font;
+    public int maxLength;
 
     public InputTextData(InputText input) : base(input, "inputText")
     {
@@ -30,7 +31,9 @@ public class InputTextData : ComponentData
         pivot = new Vector3Data((input.transform as RectTransform).pivot);
         pivot.y = 1 - pivot.y;
         textAlign = input.textAlign.ToString().ToLower();
-        if( input.font )
+        maxLength = input.maxLength;
+
+        if ( input.font )
         {
             font = input.font.name;
         }
