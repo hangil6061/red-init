@@ -16,7 +16,11 @@ public class TextData : ComponentData
     public Vector3Data pivot;
     public float strokeThickness = 0;
     public string strokeColor = "";
-    public int lineHeight = 0; 
+    public int lineHeight = 0;
+
+    public string dropShadowColor = "";
+    public float dropShadowDistance = 0;
+
 
     public TextData(Text text) : base(text, "text")
     {
@@ -37,5 +41,13 @@ public class TextData : ComponentData
             this.strokeThickness = outline.effectDistance.x;
             this.strokeColor = Util.ColorToHex(outline.effectColor);
         }
+
+        Shadow shadow = text.GetComponent<Shadow>();
+        if( shadow )
+        {
+            this.dropShadowColor = Util.ColorToHex(shadow.effectColor);
+            this.dropShadowDistance = shadow.effectDistance.x;
+        }
+
     }
 }
