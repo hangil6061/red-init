@@ -19,7 +19,7 @@ function addFileMultiEx(root, path, extensions, fileList = [] )
             {
                 for( let i = 0; i < extensions.length; i++ )
                 {
-                    if( file.indexOf( extensions[i] ) === -1) continue;
+                    if( file.indexOf( '.' + extensions[i] ) === -1) continue;
                     fileList.push( { key : file.replace('.' + extensions[i], ''), path : curPath } );
                     break;
                 }
