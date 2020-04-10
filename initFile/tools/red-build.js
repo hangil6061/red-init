@@ -119,10 +119,11 @@ async function build() {
 
     const index =
 `<!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>${title}</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     ${cssList}
 </head>
 <body>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang=ko>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <title>Omok</title>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script src="./gameframe.umd.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <demo
+            game='{
+                "url":"../","title":"Omok",
+                "frame_type" : 1
+            }'
+            server='{
+                  "url" : "",
+                  "ws" : "ws://54.180.106.133:8288/game/game-omok/2",
+                  "token" : "",
+                  "shared_url" : "" }'
+            publisher='{}'
+    ></demo>
+</div>
+
+<script>
+    Vue.config.productionTip = false;
+    new Vue({
+        components: {
+            demo: gameframe
+        }
+    }).$mount('#app')
+</script>
+
+</body>
+</html>

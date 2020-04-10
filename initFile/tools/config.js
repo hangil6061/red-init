@@ -4,7 +4,7 @@ const buildLogPath = './buildLog/';
 const versionPath = buildLogPath + 'lastVersion.json';
 const buildPath = './dist/';
 
-const copyDirList = [ './assets/', './css/', './loading/' ];
+const copyDirList = [ './assets/', './css/', './launcher/' ];
 const cssSrcPath = 'css/';
 
 module.exports = {
