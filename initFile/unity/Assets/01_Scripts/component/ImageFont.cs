@@ -6,6 +6,7 @@ using UnityEngine;
 public struct ImageFontChar {
     public string ch;
     public Sprite sp;
+    public Vector2 size;
 }
 
 public class ImageFont : MonoBehaviour {
