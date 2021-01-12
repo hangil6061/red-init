@@ -11,7 +11,7 @@
     "build": "webpack --mode=production --config=webpack.config.prod.js",
     "red-build": "node ./tools/red-build",
     "red-upload": "node ./tools/red-upload",
-    "initFramework": "git clone https://github.com/hangil6061/red-framework.git framework"
+    "initFramework": "git clone git@192.168.0.36:hangil6061/red-framework.git framework"
   },
   "author": "",
   "license": "ISC",
