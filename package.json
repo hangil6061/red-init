@@ -12,6 +12,6 @@
         "red-init": "./bin/index.js"
     },
     "publishConfig": {
-        "registry": "http://192.168.0.10:18081/repository/npm-hosted/"
+        "registry": "http://192.168.0.11:18081/repository/npm-hosted/"
     }
 }
